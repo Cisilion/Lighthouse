@@ -1,0 +1,79 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.15.31.15270",
+      "templateHash": "9656231028374139307"
+    }
+  },
+  "parameters": {
+    "mspOfferName": {
+      "type": "string",
+      "defaultValue": "Cisilion Managed Services"
+    },
+    "mspOfferDescription": {
+      "type": "string",
+      "defaultValue": "Cisilion Reviewing Services"
+    },
+    "managedByTenantId": {
+      "type": "string",
+      "defaultValue": "97e97f2e-2cf9-4a26-a1ea-57167f7debad"
+    },
+    "authorizations": {
+      "type": "array",
+      "defaultValue": [
+        {
+          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Readers",
+          "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+        }
+      ]
+    },
+    "eligibleAuthorizations": {
+      "type": "array",
+      "defaultValue": [
+        {
+          "justInTimeAccessPolicy": {
+            "multiFactorAuthProvider": "Azure",
+            "maximumActivationDuration": "PT30M",
+            "managedByTenantApprovers": []
+          },
+          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
+          "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+    "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.ManagedServices/registrationDefinitions",
+      "apiVersion": "2022-10-01",
+      "name": "[variables('mspRegistrationName')]",
+      "properties": {
+        "description": "[parameters('mspOfferDescription')]",
+        "registrationDefinitionName": "[variables('mspRegistrationName')]",
+        "managedByTenantId": "[parameters('managedByTenantId')]",
+        "authorizations": "[parameters('authorizations')]",
+        "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
+      }
+    },
+    {
+      "type": "Microsoft.ManagedServices/registrationAssignments",
+      "apiVersion": "2022-10-01",
+      "name": "[variables('mspAssignmentName')]",
+      "properties": {
+        "registrationDefinitionId": "[subscriptionResourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
+      ]
+    }
+  ]
+}
