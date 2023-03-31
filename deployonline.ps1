@@ -19,11 +19,11 @@ $subresult = $host.ui.PromptForChoice($subtitle, $submessage, $suboptions, 1)
 if ($subresult -eq 0) {
     Get-AzSubscription | Out-GridView -Title "Select Subscription" -PassThru | Select-AzSubscription
     if ($result -eq 0 ){
-            New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion-Ltd/Lighthouse/main/CisilionReader.json"
+            New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionReader.json"
             }
         
         if ($result -eq 1){
-                New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion-Ltd/Lighthouse/main/CisilionManager.json"
+                New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionManager.json"
             }
 }
 
@@ -32,14 +32,14 @@ $subs = Get-AzSubscription
 if ($result -eq 0 ){
     foreach ($sub in $subs) {
         Select-AzSubscription -SubscriptionId $sub.Id
-        New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion-Ltd/Lighthouse/main/CisilionReader.json"
+        New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionReader.json"
         }
     }
     
     if ($result -eq 1){
         foreach ($sub in $subs) {    
             Select-AzSubscription -SubscriptionId $sub.Id
-            New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion-Ltd/Lighthouse/main/CisilionManager.json"
+            New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionManager.json"
         }
     }
 }
