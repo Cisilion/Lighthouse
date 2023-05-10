@@ -8,27 +8,21 @@ $Title = 'Access Type'
 $message = 'Please select access type to grant'
 $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 
-$single = New-Object System.Management.Automation.Host.ChoiceDescription '&Single'
-$multiple = New-Object System.Management.Automation.Host.ChoiceDescription '&Multiple'
-$suboptions = [System.Management.Automation.Host.ChoiceDescription[]] ($single, $multiple)
+$select = New-Object System.Management.Automation.Host.ChoiceDescription '&Select'
+$all = New-Object System.Management.Automation.Host.ChoiceDescription '&All'
+$suboptions = [System.Management.Automation.Host.ChoiceDescription[]] ($select, $all)
 
-$SubTitle = 'Single or Multiple Subscription Access'
+$SubTitle = 'Select or All Subscription Access'
 $submessage = 'Please select whether to grant for all subscriptions or just a single one'
-$subresult = $host.ui.PromptForChoice($subtitle, $submessage, $suboptions, 1)
-
-if ($subresult -eq 0) {
-    Get-AzSubscription | Out-GridView -Title "Select Subscription" -PassThru | Select-AzSubscription
-    if ($result -eq 0 ){
-            New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionReader.json"
-            }
-        
-        if ($result -eq 1){
-                New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionManager.json"
-            }
-}
+$subresult = $host.ui.PromptForChoice($subtitle, $submessage, $suboptions, 0)
 
 if ($subresult -eq 1) {
-$subs = Get-AzSubscription
+    $subs = Get-AzSubscription
+}
+if ($subresult -eq 0) {
+    $subs = Get-AzSubscription | Out-GridView -PassThru -Title "Select Subscriptions to Manage, hold ctrl to select multiple"
+}
+
 if ($result -eq 0 ){
     foreach ($sub in $subs) {
         Select-AzSubscription -SubscriptionId $sub.Id
@@ -42,5 +36,4 @@ if ($result -eq 0 ){
             New-AzDeployment -location uksouth -TemplateUri "https://raw.githubusercontent.com/Cisilion/Lighthouse/main/CisilionManager.json"
         }
     }
-}
     
