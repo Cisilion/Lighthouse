@@ -1,14 +1,7 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "metadata": {
-    "_generator": {
-      "name": "bicep",
-      "version": "0.15.31.15270",
-      "templateHash": "8780093478018828514"
-    }
-  },
-  "parameters": {
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+      "parameters": {
     "mspOfferName": {
       "type": "string",
       "defaultValue": "Cisilion Managed Services"
@@ -86,43 +79,42 @@
       ]
     }
   },
-  "variables": {
-    "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
-    "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.ManagedServices/registrationDefinitions",
-      "apiVersion": "2022-10-01",
-      "name": "[variables('mspRegistrationName')]",
-      "properties": {
-        "description": "[parameters('mspOfferDescription')]",
-        "registrationDefinitionName": "[variables('mspRegistrationName')]",
-        "managedByTenantId": "[parameters('managedByTenantId')]",
-        "authorizations": "[parameters('authorizations')]",
-        "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
-      }
+    "variables": {
+        "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
     },
-    {
-      "type": "Microsoft.ManagedServices/registrationAssignments",
-      "apiVersion": "2022-10-01",
-      "name": "[variables('mspAssignmentName')]",
-      "properties": {
-        "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
-      ]
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspRegistrationName')]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('mspOfferName')]",
+                "description": "[parameters('mspOfferDescription')]",
+                "managedByTenantId": "[parameters('managedByTenantId')]",
+                "authorizations": "[parameters('authorizations')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspAssignmentName')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            ],
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            }
+        }
+    ],
+    "outputs": {
+        "mspOfferName": {
+            "type": "string",
+            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        },
+        "authorizations": {
+            "type": "array",
+            "value": "[parameters('authorizations')]"
+        }
     }
-  ],
-  "outputs": {
-    "mspOffer_output": {
-      "type": "string",
-      "value": "[format('Managed by {0}', parameters('mspOfferName'))]"
-    },
-    "authorizations_output": {
-      "type": "array",
-      "value": "[parameters('authorizations')]"
-    }
-  }
 }
