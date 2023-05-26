@@ -1,84 +1,84 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-      "parameters": {
-    "mspOfferName": {
-      "type": "string",
-      "defaultValue": "Cisilion Managed Services"
-    },
-    "mspOfferDescription": {
-      "type": "string",
-      "defaultValue": "Cisilion Azure Lighthouse Managed Service"
-    },
-    "managedByTenantId": {
-      "type": "string",
-      "defaultValue": "97e97f2e-2cf9-4a26-a1ea-57167f7debad"
-    },
-    "authorizations": {
-      "type": "array",
-      "defaultValue": [
-        {
-          "principalId": "0712a020-4d28-4829-8bd8-134730317638",
-          "principalIdDisplayName": "Policy Automation Account",
-          "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
-          "delegatedRoleDefinitionIds": [
-            "b24988ac-6180-42a0-ab88-20f7382dd24c",
-            "92aaf0da-9dab-42b6-94a3-d43ce8d16293"
-          ]
+    "parameters": {
+        "mspOfferName": {
+            "defaultValue": "Cisilion Managed Services",
+            "type": "String"
         },
-        {
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Readers",
-          "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+        "mspOfferDescription": {
+            "defaultValue": "Cisilion Azure Lighthouse Managed Service",
+            "type": "String"
+        },
+        "managedByTenantId": {
+            "defaultValue": "97e97f2e-2cf9-4a26-a1ea-57167f7debad",
+            "type": "String"
+        },
+        "authorizations": {
+            "defaultValue": [
+                {
+                    "principalId": "0712a020-4d28-4829-8bd8-134730317638",
+                    "principalIdDisplayName": "Policy Automation Account",
+                    "roleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+                    "delegatedRoleDefinitionIds": [
+                        "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                        "92aaf0da-9dab-42b6-94a3-d43ce8d16293"
+                    ]
+                },
+                {
+                    "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+                    "principalIdDisplayName": "Cisilion Azure Lighthouse Readers",
+                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                }
+            ],
+            "type": "Array"
+        },
+        "eligibleAuthorizations": {
+            "defaultValue": [
+                {
+                    "justInTimeAccessPolicy": {
+                        "multiFactorAuthProvider": "Azure",
+                        "maximumActivationDuration": "PT8H",
+                        "managedByTenantApprovers": []
+                    },
+                    "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+                    "principalIdDisplayName": "Cisilion Azure Lighthouse Contributor",
+                    "roleDefinitionId": "39bc4728-0917-49c7-9d2c-d95423bc2eb4"
+                },
+                {
+                    "justInTimeAccessPolicy": {
+                        "multiFactorAuthProvider": "Azure",
+                        "maximumActivationDuration": "PT8H",
+                        "managedByTenantApprovers": []
+                    },
+                    "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+                    "principalIdDisplayName": "Cisilion Azure Lighthouse Contributor",
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+                },
+                {
+                    "justInTimeAccessPolicy": {
+                        "multiFactorAuthProvider": "Azure",
+                        "maximumActivationDuration": "PT30M",
+                        "managedByTenantApprovers": []
+                    },
+                    "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+                    "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
+                    "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"
+                },
+                {
+                    "justInTimeAccessPolicy": {
+                        "multiFactorAuthProvider": "Azure",
+                        "maximumActivationDuration": "PT8H",
+                        "managedByTenantApprovers": []
+                    },
+                    "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
+                    "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management Contributor",
+                    "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
+                }
+            ],
+            "type": "Array"
         }
-      ]
     },
-    "eligibleAuthorizations": {
-      "type": "array",
-      "defaultValue": [
-        {
-          "justInTimeAccessPolicy": {
-            "multiFactorAuthProvider": "Azure",
-            "maximumActivationDuration": "PT8H",
-            "managedByTenantApprovers": []
-          },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Contributor",
-          "roleDefinitionId": "39bc4728-0917-49c7-9d2c-d95423bc2eb4"
-        },
-        {
-          "justInTimeAccessPolicy": {
-            "multiFactorAuthProvider": "Azure",
-            "maximumActivationDuration": "PT8H",
-            "managedByTenantApprovers": []
-          },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Contributor",
-          "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
-        },
-        {
-          "justInTimeAccessPolicy": {
-            "multiFactorAuthProvider": "Azure",
-            "maximumActivationDuration": "PT30M",
-            "managedByTenantApprovers": []
-          },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
-          "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"          
-        },
-        {
-          "justInTimeAccessPolicy": {
-            "multiFactorAuthProvider": "Azure",
-            "maximumActivationDuration": "PT8H",
-            "managedByTenantApprovers": []
-          },
-          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management Contributor",
-          "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
-        }
-      ]
-    }
-  },
     "variables": {
         "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
         "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
@@ -86,34 +86,35 @@
     "resources": [
         {
             "type": "Microsoft.ManagedServices/registrationDefinitions",
-            "apiVersion": "2019-09-01",
+            "apiVersion": "2022-10-01",
             "name": "[variables('mspRegistrationName')]",
             "properties": {
-                "registrationDefinitionName": "[parameters('mspOfferName')]",
                 "description": "[parameters('mspOfferDescription')]",
+                "registrationDefinitionName": "[variables('mspRegistrationName')]",
                 "managedByTenantId": "[parameters('managedByTenantId')]",
-                "authorizations": "[parameters('authorizations')]"
+                "authorizations": "[parameters('authorizations')]",
+                "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
             }
         },
         {
             "type": "Microsoft.ManagedServices/registrationAssignments",
-            "apiVersion": "2019-09-01",
+            "apiVersion": "2022-10-01",
             "name": "[variables('mspAssignmentName')]",
             "dependsOn": [
-                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
             ],
             "properties": {
-                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
             }
         }
     ],
     "outputs": {
-        "mspOfferName": {
-            "type": "string",
-            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        "mspOffer_output": {
+            "type": "String",
+            "value": "[format('Managed by {0}', parameters('mspOfferName'))]"
         },
-        "authorizations": {
-            "type": "array",
+        "authorizations_output": {
+            "type": "Array",
             "value": "[parameters('authorizations')]"
         }
     }
