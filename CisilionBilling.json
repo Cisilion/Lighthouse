@@ -43,6 +43,16 @@
           "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
           "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management Contributor",
           "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
+        },
+        {
+          "justInTimeAccessPolicy": {
+            "multiFactorAuthProvider": "Azure",
+            "maximumActivationDuration": "PT30M",
+            "managedByTenantApprovers": []
+          },
+          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
+          "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"          
         }
       ]
     }
