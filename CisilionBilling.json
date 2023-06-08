@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.15.31.15270",
-      "templateHash": "15192443576529455625"
+      "version": "0.17.1.54307",
+      "templateHash": "16556976399420425242"
     }
   },
   "parameters": {
@@ -26,7 +26,7 @@
       "defaultValue": [
         {
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Billing Readers",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Billing Readers",
           "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
         }
       ]
@@ -50,9 +50,9 @@
             "maximumActivationDuration": "PT30M",
             "managedByTenantApprovers": []
           },
-          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
+          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
           "principalIdDisplayName": "Cisilion Azure Lighthouse Billing Removal Permissions",
-          "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"          
+          "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"
         }
       ]
     }
@@ -72,6 +72,12 @@
         "managedByTenantId": "[parameters('managedByTenantId')]",
         "authorizations": "[parameters('authorizations')]",
         "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
+      },
+      "plan": {
+        "name": "cs-lighthouse-billing",
+        "product": "ms-cisilion-lighthouse",
+        "publisher": "cisilionltd1596824675267",
+        "version": "1.0.1"
       }
     },
     {
