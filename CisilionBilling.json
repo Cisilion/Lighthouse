@@ -25,8 +25,8 @@
       "type": "array",
       "defaultValue": [
         {
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Readers",
+          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
+          "principalIdDisplayName": "Cisilion Azure Licensing Readers",
           "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
         }
       ]
@@ -40,7 +40,7 @@
             "maximumActivationDuration": "PT8H",
             "managedByTenantApprovers": []
           },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
           "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management Contributor",
           "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
         },
@@ -50,7 +50,7 @@
             "maximumActivationDuration": "PT30M",
             "managedByTenantApprovers": []
           },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
           "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
           "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"          
         }
