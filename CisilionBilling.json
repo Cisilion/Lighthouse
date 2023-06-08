@@ -26,7 +26,7 @@
       "defaultValue": [
         {
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Licensing Readers",
+          "principalIdDisplayName": "Cisilion Azure Billing Readers",
           "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
         }
       ]
@@ -41,7 +41,7 @@
             "managedByTenantApprovers": []
           },
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management Contributor",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management",
           "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
         },
         {
@@ -51,7 +51,7 @@
             "managedByTenantApprovers": []
           },
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Removal Permissions",
+          "principalIdDisplayName": "Cisilion Azure Lighthouse Billing Removal Permissions",
           "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"          
         }
       ]
