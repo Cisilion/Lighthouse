@@ -1,21 +1,17 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "16556976399420425242"
+      "templateHash": "3984682976248210323"
     }
   },
   "parameters": {
-    "mspOfferName": {
+    "definitionName": {
       "type": "string",
-      "defaultValue": "Cisilion Licensing Services"
-    },
-    "mspOfferDescription": {
-      "type": "string",
-      "defaultValue": "Cisilion Azure Lighthouse Licensing Service"
+      "defaultValue": "Cisilion Azure Lighthouse Service (Cisilion Cost Optimisation)"
     },
     "managedByTenantId": {
       "type": "string",
@@ -26,7 +22,7 @@
       "defaultValue": [
         {
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Billing Readers",
+          "principalIdDisplayName": "Cisilion Azure Billing Reader",
           "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
         }
       ]
@@ -41,7 +37,7 @@
             "managedByTenantApprovers": []
           },
           "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
-          "principalIdDisplayName": "Cisilion Azure Lighthouse Cost Management",
+          "principalIdDisplayName": "Cisilion Azure Cost Management",
           "roleDefinitionId": "434105ed-43f6-45c7-a02f-909b2ba83430"
         },
         {
@@ -50,7 +46,7 @@
             "maximumActivationDuration": "PT30M",
             "managedByTenantApprovers": []
           },
-          "principalId": "b0d840a2-0a35-45f4-8a88-e2d3f21949ce",
+          "principalId": "c43b0ef3-5c7b-4479-b693-9b428b769fc0",
           "principalIdDisplayName": "Cisilion Azure Lighthouse Billing Removal Permissions",
           "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46"
         }
@@ -58,8 +54,7 @@
     }
   },
   "variables": {
-    "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
-    "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
+    "mspRegistrationName": "[guid(parameters('definitionName'))]"
   },
   "resources": [
     {
@@ -67,8 +62,8 @@
       "apiVersion": "2022-10-01",
       "name": "[variables('mspRegistrationName')]",
       "properties": {
-        "description": "[parameters('mspOfferDescription')]",
-        "registrationDefinitionName": "[variables('mspRegistrationName')]",
+        "description": "",
+        "registrationDefinitionName": "[parameters('definitionName')]",
         "managedByTenantId": "[parameters('managedByTenantId')]",
         "authorizations": "[parameters('authorizations')]",
         "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
@@ -83,7 +78,7 @@
     {
       "type": "Microsoft.ManagedServices/registrationAssignments",
       "apiVersion": "2022-10-01",
-      "name": "[variables('mspAssignmentName')]",
+      "name": "[variables('mspRegistrationName')]",
       "properties": {
         "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions', variables('mspRegistrationName'))]"
       },
@@ -95,7 +90,7 @@
   "outputs": {
     "mspOffer_output": {
       "type": "string",
-      "value": "[format('Managed by {0}', parameters('mspOfferName'))]"
+      "value": "[format('Managed by {0}', parameters('definitionName'))]"
     },
     "authorizations_output": {
       "type": "array",
